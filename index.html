@@ -13,6 +13,7 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            overflow: hidden;
         }
 
         .container {
@@ -20,15 +21,28 @@
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
         }
 
         .fact-box {
             margin: 20px 0;
-            padding: 10px;
+            padding: 20px;
             border: 1px solid #ddd;
             border-radius: 4px;
             background-color: #f9f9f9;
+            transition: background-color 0.3s;
+        }
+
+        .fact-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
         }
 
         button {
@@ -39,37 +53,75 @@
             border-radius: 4px;
             background-color: #007bff;
             color: #fff;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         button:hover {
             background-color: #0056b3;
+            transform: translateY(-3px);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Fun Fact Generator</h1>
-        <div id="fact" class="fact-box">Click the button to see a fun fact!</div>
+        <div id="fact" class="fact-box">
+            <img id="factImage" src="" alt="Fact Image" style="display:none;">
+            <p id="factText">Click the button to see a fun fact!</p>
+        </div>
         <button id="generateFact">Generate Fact</button>
     </div>
     <script>
         const facts = [
-            "Earth is the third planet from the Sun.",
-            "Approximately 71% of Earth's surface is covered by water.",
-            "Earth is the only known planet to support life.",
-            "Earth has one natural satellite, the Moon.",
-            "The Earth's atmosphere is composed of 78% nitrogen and 21% oxygen.",
-            "Earth's rotation is gradually slowing down, at a rate of about 17 milliseconds per century.",
-            "The Earth's core is composed primarily of iron and nickel.",
-            "Earth's magnetic field protects it from solar and cosmic radiation.",
-            "The highest point on Earth is Mount Everest, which is 8,848 meters above sea level.",
-            "The Earth's age is estimated to be about 4.54 billion years."
+            {
+                text: "Earth is the third planet from the Sun.",
+                image: "https://example.com/image1.jpg"
+            },
+            {
+                text: "Approximately 71% of Earth's surface is covered by water.",
+                image: "https://example.com/image2.jpg"
+            },
+            {
+                text: "Earth is the only known planet to support life.",
+                image: "https://example.com/image3.jpg"
+            },
+            {
+                text: "Earth has one natural satellite, the Moon.",
+                image: "https://example.com/image4.jpg"
+            },
+            {
+                text: "The Earth's atmosphere is composed of 78% nitrogen and 21% oxygen.",
+                image: "https://example.com/image5.jpg"
+            },
+            {
+                text: "Earth's rotation is gradually slowing down, at a rate of about 17 milliseconds per century.",
+                image: "https://example.com/image6.jpg"
+            },
+            {
+                text: "The Earth's core is composed primarily of iron and nickel.",
+                image: "https://example.com/image7.jpg"
+            },
+            {
+                text: "Earth's magnetic field protects it from solar and cosmic radiation.",
+                image: "https://example.com/image8.jpg"
+            },
+            {
+                text: "The highest point on Earth is Mount Everest, which is 8,848 meters above sea level.",
+                image: "https://example.com/image9.jpg"
+            },
+            {
+                text: "The Earth's age is estimated to be about 4.54 billion years.",
+                image: "https://example.com/image10.jpg"
+            }
         ];
 
         document.getElementById('generateFact').addEventListener('click', function() {
             const randomIndex = Math.floor(Math.random() * facts.length);
-            document.getElementById('fact').textContent = facts[randomIndex];
+            const fact = facts[randomIndex];
+            document.getElementById('factText').textContent = fact.text;
+            const factImage = document.getElementById('factImage');
+            factImage.src = fact.image;
+            factImage.style.display = 'block';
         });
     </script>
 </body>
